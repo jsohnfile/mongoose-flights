@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mongoose Flights</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+  <h2>Enter a New Flight</h2>
+  <form action="/flights" method="POST">
+    <label>Airline:
+      <input type="text" name="airline">
+    </label><br>
+    <label>Airport:
+      <select name="airport">
+        <option value="AUS">AUS</option>
+        <option value="DFW">DFW</option>
+        <option value="DEN" selected>DEN</option>
+        <option value="LAX">LAX</option>
+        <option value="SAN">SAN</option>
+      </select>
+    </label><br>
+    <label>Flight Number:
+        <input type="number" name="flightNo">
+    </label><br>
+    <label>Departure Date:
+        <input type="datetime-local" name="departs">
+    </label>
+    <input type="submit" value="Add Flight">
+  </form>
+</body>
+</html>
