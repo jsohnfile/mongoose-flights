@@ -15,6 +15,7 @@ function index(req, res) {
 
 function create(req, res) {
     if(!req.body.departs) delete req.body.departs;
+    if(!req.body.airport) delete req.body.airport;
     const flight = new Flight(req.body);
     flight.save(function(err) {
         if (err) return res.render('flights/new');
