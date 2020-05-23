@@ -22,7 +22,7 @@
       <% }); %>
     <% } %>
     <label style="color:'red'">&nbsp;&nbsp;Add Destination</label>
-    <form id="add-destination-form" method="POST" action="/flights/<% flight._id %>/destinations">
+    <form id="add-destination-form" method="POST" action="/flights/<%= flight._id %>/destinations">
       <label> &nbsp;&nbsp;Destination Airport:</label>
       <select name="dairport">
         <option value="AUS">AUS</option>
