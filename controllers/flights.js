@@ -15,7 +15,7 @@ function show(req, res) {
 
 function index(req, res) {
     Flight.find({}, function(err, flights) {
-        res.render('flights/index', {flights});
+        res.render('flights/index', {title: 'All Flights', flights});
 
     });
 }
@@ -33,5 +33,7 @@ function create(req, res) {
 
 
 function newFlight(req, res) {
-    res.render('flights/new')
+    Flight.find({}, function(err, flights) {
+        res.render('flights/new',{ title: 'Enter a New Flight', flights});
+    });
 }

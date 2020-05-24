@@ -1,27 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel='stylesheet' href='/stylesheets/style.css' />
-  <title><%= title %></title>
-</head>
-<body>
-  <h1><%= title %></h1>
+<%- include('../partials/header') %>
   <tr>
     <td><b>Airline:</b> <%= flight.airline %></td><br>
+    <td><b>Flight Number:</b> <%= flight.flightNo %></td><br>
+    <td><b>Departure Date:</b> <%= flight.departs %></td><br>
     <td><b>Departure Airport:</b> <%= flight.airport %></td><br>
     <%if(flight.destinations.length) { %>
+      <% flight.destinations.sort((a,b) => new Date(a.arrivals) - new Date(b.arrivals)); %>
+      <ul>
       <%flight.destinations.forEach(function(d) { %>
-        <tr>
-          <td>Destination</td><br>
-          <td>Arrival Airport: <%= d.dairport %></td><br>
-          <td>Arrival Date: <%= d.arrivals %></td><br>
-        </tr>
+        <li>
+          <div>Destination Airport: <%= d.dairport %></td><br>
+          <div>Arrival Date: <%= d.arrivals %></div><br>
+        </li>
       <% }); %>
-    <% } %>
-    <label style="color:'red'">&nbsp;&nbsp;Add Destination</label>
+      </ul>
+      <% } %>
+    </tr>
+    <label style="color:red;">&nbsp;&nbsp;Add A Destination</label>
     <form id="add-destination-form" method="POST" action="/flights/<%= flight._id %>/destinations">
       <label> &nbsp;&nbsp;Destination Airport:</label>
       <select name="dairport">
@@ -30,14 +25,11 @@
         <option value="DEN">DEN</option>
         <option value="LAX">LAX</option>
         <option value="SAN">SAN</option>
-      </select>
+      </select><br>
       <label>&nbsp;&nbsp;Arrival Date: <input type="datetime-local" name="arrivals"></label>
       <input type="submit" value="Add Destination">
     </form>
 
-    <td><b>Flight Number:</b> <%= flight.flightNo %></td><br>
-    <td><b>Departure Date:</b> <%= flight.departs %></td><br>
-        </tr>
 
 
 </body>
