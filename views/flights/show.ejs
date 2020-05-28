@@ -4,19 +4,30 @@
     <td><b>Flight Number:</b> <%= flight.flightNo %></td><br>
     <td><b>Departure Date:</b> <%= flight.departs %></td><br>
     <td><b>Departure Airport:</b> <%= flight.airport %></td><br>
+ 
     <%if(flight.destinations.length) { %>
       <% flight.destinations.sort((a,b) => new Date(a.arrivals) - new Date(b.arrivals)); %>
+      
       <ul>
-      <%flight.destinations.forEach(function(d) { %>
+        <% flight.destinations.forEach(function(d) { %>
         <li>
-          <div>Destination Airport: <%= d.dairport %></td><br>
-          <div>Arrival Date: <%= d.arrivals %></div><br>
+          <tr>
+            <form action="/flights/<%= flight._id %>/destinations/<%= d._id %>?_method=DELETE"
+              class="delete-form" method="POST">
+              <button type="submit">X</button>
+            </td>
+            <td>Destination Airport: <%= d.dairport %>&nbsp;&nbsp;</td>
+            <td>Arrival Date: <%= d.arrivals %></td>
+            <td>id:<%= d._id %></td>
+          </tr>
         </li>
+      </form>
       <% }); %>
+
       </ul>
       <% } %>
     </tr>
-    <label style="color:red;">&nbsp;&nbsp;Add A Destination</label>
+    <div style="color:red;">&nbsp;&nbsp;Add A Destination </div>
     <form id="add-destination-form" method="POST" action="/flights/<%= flight._id %>/destinations">
       <label> &nbsp;&nbsp;Destination Airport:</label>
       <select name="dairport">
@@ -28,9 +39,22 @@
       </select><br>
       <label>&nbsp;&nbsp;Arrival Date: <input type="datetime-local" name="arrivals"></label>
       <input type="submit" value="Add Destination">
-    </form>
+    </form><br>
 
 
-
+    <%if(tickets.length) { %>
+      <% tickets.forEach(function(t) { %>
+        <tr>
+          <form action="/flights/<%= flight._id %>/<%= t._id %>?_method=DELETE"
+            class="delete-form" method="POST">
+            <button type="submit">X</button>
+          <td><strong>Ticket: &nbsp;&nbsp;</strong></td>
+          <td>Seat: <%= t.seat %></td>
+          <td>&nbsp;&nbsp;Price: $<%= t.price %></td>
+        </form>
+        </tr><br>
+      <% }); %>  
+    <% }; %>
+    <br><a href="/flights/<%= flight._id%>/tickets/new"><button>Add a Ticket</button></a>
 </body>
 </html>

@@ -1,4 +1,5 @@
 <%- include('../partials/header') %>
+<h2>Today's date: <%= now %></h2>
   <table>
     <thead>
       <tr>
@@ -9,13 +10,13 @@
       </tr>
     </thead>
     <tbody>
-      <% flights.forEach(function(f) { %>  
-        <tr>
-          <td><%= f.airline %></td>
-          <td><%= f.airport %></td>
-          <td><%= f.flightNo %></td>
-          <td><%= f.departs %></td>
-          <td><a href="/flights/<%= f._id %>"><button>DETAILS</button></a></td>
+      <% flights.forEach(function(flight) { %>  
+        <tr style=<%= flight.departs.getTime() < now ? "color:red" : "color:black" %> >
+          <td><%= flight.airline %></td>
+          <td><%= flight.airport %></td>
+          <td><%= flight.flightNo %></td>
+          <td><%= flight.departs %></td>
+          <td><a href="/flights/<%= flight._id %>"><button>DETAILS</button></a></td>
         </tr>
 
       <% }); %>
