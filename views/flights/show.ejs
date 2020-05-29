@@ -1,16 +1,29 @@
 <%- include('../partials/header') %>
-  <tr>
-    <td><b>Airline:</b> <%= flight.airline %></td><br>
-    <td><b>Flight Number:</b> <%= flight.flightNo %></td><br>
-    <td><b>Departure Date:</b> <%= flight.departs %></td><br>
-    <td><b>Departure Airport:</b> <%= flight.airport %></td><br>
+  
+<table>
+  <thead>
+    <tr>
+      <th><u>Airline</u></th>
+      <th><u>Airport</u></th>
+      <th><u>Flight Number</u></th>
+      <th><u>Departure Date</u></th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><%= flight.airline %></td>
+        <td><%= flight.airport %></td>
+        <td><%= flight.flightNo %></td>
+        <td><%= flight.departs %></td>
+      </tr>
+  </tbody>
+</table>
  
     <%if(flight.destinations.length) { %>
       <% flight.destinations.sort((a,b) => new Date(a.arrivals) - new Date(b.arrivals)); %>
       
       <ul>
         <% flight.destinations.forEach(function(d) { %>
-        <li>
           <tr>
             <form action="/flights/<%= flight._id %>/destinations/<%= d._id %>?_method=DELETE"
               class="delete-form" method="POST">
@@ -18,7 +31,6 @@
             </td>
             <td>Destination Airport: <%= d.dairport %>&nbsp;&nbsp;</td>
             <td>Arrival Date: <%= d.arrivals %></td>
-            <td>id:<%= d._id %></td>
           </tr>
         </li>
       </form>
@@ -26,7 +38,6 @@
 
       </ul>
       <% } %>
-    </tr>
     <div style="color:red;">&nbsp;&nbsp;Add A Destination </div>
     <form id="add-destination-form" method="POST" action="/flights/<%= flight._id %>/destinations">
       <label> &nbsp;&nbsp;Destination Airport:</label>
@@ -42,8 +53,10 @@
     </form><br>
 
 
+    <br><label><strong>TICKETS</strong>&nbsp;&nbsp;<a href="/flights/<%= flight._id%>/tickets/new"><button>Add a Ticket</button></a></label><br>
     <%if(tickets.length) { %>
       <% tickets.forEach(function(t) { %>
+        <br>
         <tr>
           <form action="/flights/<%= flight._id %>/<%= t._id %>?_method=DELETE"
             class="delete-form" method="POST">
@@ -55,6 +68,5 @@
         </tr><br>
       <% }); %>  
     <% }; %>
-    <br><a href="/flights/<%= flight._id%>/tickets/new"><button>Add a Ticket</button></a>
 </body>
 </html>

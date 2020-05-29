@@ -11,7 +11,6 @@ module.exports = {
 function show(req, res) {
     Flight.findById(req.params.id, function(err, flight) {
         Ticket.find({flight: flight._id}, function(err, tickets) {
-            console.log(tickets)
         res.render('flights/show', { title:  `${flight.airline} Flight ${flight.flightNo} Detail`, flight, tickets });
       });
     });
@@ -31,7 +30,6 @@ function create(req, res) {
     const flight = new Flight(req.body);
     flight.save(function(err, flights) {
         if (err) return res.render('flights/new',{ title: 'Invalid Entry Please Try Again', flights});
-        console.log(flight);
         res.render('flights/new',{ title: 'Success! Enter Another Flight', flights});
     })
 }

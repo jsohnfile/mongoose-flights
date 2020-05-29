@@ -5,7 +5,7 @@ const ticketsCtrl = require('../controllers/tickets');
 
 router.get('/flights/:id/tickets/new', ticketsCtrl.new);
 router.post('/flights/tickets/:id', ticketsCtrl.create);
-// router.delete('/flights/:id/:tid', ticketsCtrl.delete)
+router.delete('/flights/:id/:tid', ticketsCtrl.delete)
 
 
 module.exports = router;
